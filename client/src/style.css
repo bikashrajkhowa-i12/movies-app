@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f0f0f;
+}
+
+.navbar {
+  position: sticky;
+  justify-content: space-between;  /*pushes the first element to extreme left and last elements to the extreme right horizontally*/
+  top: 0;
+  z-index: 100;
+  padding: 25px 60px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(27, 31, 34);
+}
+
+.nav-group {
+  display: flex;
+  gap: 80px;
+  width: 100%;
+  align-items: center;
+}
+
+.navlogo {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #fbdf72;
+  transition: transform 0.3s ease;
+}
+
+.navlogo:hover {
+  transform: scale(1.05) translateY(-2px);
+  cursor: pointer;
+  text-shadow: 0 1px 5px #facc15, 0 0 0 #facc15;
+}
+
+.nav-search {
+  padding: 4px 7px;
+  font-size: 1rem;
+  color: #f9f7f3;
+  border: none; /* removes border*/
+  border-radius: 28px; /* for rounded corners*/
+  background-color: #2c2c2c;
+  outline: none; /* removes blue outline when on-click*/
+  box-shadow: none; /* prevent inner shadow on focus */
+  transition: box-shadow 0.3s ease, background-color 0.3s ease; /* smooth transition in and out on-click*/
+  margin-top: 3px;
+}
+
+.nav-search:focus {
+  box-shadow: 0 0 4px #facc15;
+  background-color: #2f2f2f;
+}
+
+.nav-search:hover {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease; /* smooth transition in and out on-click*/
+  box-shadow: 0 0 4px #facc15;
+  background-color: #2f2f2f;
+}
+
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-size: 1rem;
+  color: #f9f7f3;
+}
+
+.navlinks span {
+  transition: color 0.4s ease, transform 0.4s ease;
+  cursor: pointer;
+}
+
+.navlinks span:hover {
+  transform: scale(1.4) translateX(-2px);
+  cursor: pointer;
+}
+
+.user-avatar {
+  margin-left: auto; /* Push this element as far to the right as possible within its parent container.*/
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #facc15; /*subtle glow effect */
+  cursor: pointer;
+}
