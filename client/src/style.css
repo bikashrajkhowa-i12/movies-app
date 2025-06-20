@@ -4,15 +4,30 @@ body {
   background-color: #0f0f0f;
 }
 
+.parent-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;   
+  background-color: rgb(23, 25, 27);
+  display: flex;
+  flex-direction: column; 
+}
+
+.content-section {
+  position: relative;
+}
+
 .navbar {
   position: sticky;
-  justify-content: space-between;  /*pushes the first element to extreme left and last elements to the extreme right horizontally*/
+  min-height: 80px;
+  justify-content: space-between; /*pushes the first element to extreme left and last elements to the extreme right horizontally*/
   top: 0;
-  z-index: 100;
+  z-index: 110;
   padding: 25px 60px;
   display: flex;
   align-items: center;
   background-color: rgb(27, 31, 34);
+  overflow: hidden;
 }
 
 .nav-group {
@@ -68,12 +83,11 @@ body {
 }
 
 .navlinks span {
-  transition: color 0.4s ease, transform 0.4s ease;
-  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .navlinks span:hover {
-  transform: scale(1.4) translateX(-2px);
+  transform: scale(1.3);
   cursor: pointer;
 }
 
@@ -86,21 +100,62 @@ body {
   cursor: pointer;
 }
 
+.loading-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.441);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all; /* blocks interaction underneath */
+}
+
+.spinner-div {
+  color: #000000c5;
+  width: 10rem;
+  height: 10rem;
+}
+
 .poster {
   position: relative;
   height: 400px;
   width: 100%;
   overflow: hidden;
-  border-radius: 10px;
+  /* border-radius: 6px; */
+}
+
+.poster-image-wrapper {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .poster-image {
   width: 100%;
-  height: 100%;
+  height: 150%; /*Making it larger than 100% so it can animate*/
   object-fit: cover; /*fits the entire space without stretching, but if required zoom in*/
+  animation: panDown 8s linear infinite;
 }
 
-
+@keyframes panDown {
+  0% {
+    transform: translateY(0%);
+  }
+  /* 50%{
+    transform: translateX(80%);
+  } */
+  100% {
+    transform: translateY(-30%);
+  }
+}
 
 /*to overcome that we wrap with a empty <div> layer with css for the opacity */
 .poster-overlay {
@@ -118,8 +173,8 @@ body {
   bottom: 60px;
   left: 60px;
   color: white;
-  max-width: 50%;        /* Limits the width to half of the container to prevent long lines or overlapping text.*/
-  z-index: 1;       /*Ensures it sits above the background image, especially if layering (z-index) is being used.*/
+  max-width: 50%; /* Limits the width to half of the container to prevent long lines or overlapping text.*/
+  z-index: 1; /*Ensures it sits above the background image, especially if layering (z-index) is being used.*/
 }
 
 .poster-title {
@@ -154,6 +209,34 @@ body {
   color: white;
 }
 
+.poster-slide-indicator {
+  position: absolute;
+  display: flex;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
+  z-index: 2;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.dot.active {
+  background-color: #ffffff;
+}
+
 .nav-arrow {
   position: absolute;
   top: 50%;
@@ -179,4 +262,74 @@ body {
 
 .nav-arrow.left {
   left: 20px;
+}
+
+.movie-card-section {
+  padding: 30px 50px;
+  overflow-x: auto; 
+}
+
+.movie-card-header {
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* Converted into in-line styling due to different-styling of same <div> across various pages*/
+/* .movie-card-layout {
+  display: inline-flex;
+  gap: 25px;
+  padding-bottom: 10px;
+} */
+
+.movie-card {
+  display: flex;
+  width: auto;
+  height: 230px;
+  overflow: auto;
+  border-radius: 8px;
+  transition: transform 0.4s ease, border 0.3s ease;
+  cursor: pointer;
+  border: 5px solid transparent;
+  transform-origin: center;
+}
+
+.movie-card:hover {
+  transform: scale(1.2);
+  border: 5px solid #e5e7eb5c;
+}
+
+.more-card {
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15));
+  color: #ccc;
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.more-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.more-card::after {
+  content: "See More →";
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.more-card:hover::after {
+  opacity: 1;
+  text-decoration: underline;
 }

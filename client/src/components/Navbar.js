@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const Navbar = ({ movies = [] }) => {
+const Navbar = (data) => {
   return (
     <nav className="navbar">
       <div className="nav-group">
