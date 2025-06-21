@@ -10,7 +10,6 @@ export const getCssStyling = (styleObj) => {
   Object.keys(styleObj).forEach((key) => {
     obj[camelToKebab(key)] = styleObj[key];
   });
-  console.log("obj:", obj)
   return obj;
 };
 

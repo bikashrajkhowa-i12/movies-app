@@ -1,27 +1,59 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = (data) => {
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar">
       <div className="nav-group">
-        <div className="navlogo"> C I N E M A</div>
+        <div className="navlogo" onClick={() => navigate("/home")}>
+          C I N E M A
+        </div>
         <input
           type="text"
           className="nav-search"
           placeholder="Search movies..."
         />
         <div className="navlinks">
-          <span>Home</span>
-          <span>My List</span>
-          <span>TV Series</span>
-          <span>Movies</span>
+          <NavLink
+            to="/home"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-nav" : "nav-link"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/my-list"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-nav" : "nav-link"
+            }
+          >
+            MyList
+          </NavLink>
+          <NavLink
+            to="/tv-series"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-nav" : "nav-link"
+            }
+          >
+            Tv Shows
+          </NavLink>
+          <NavLink
+            to="/movies"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-nav" : "nav-link"
+            }
+          >
+            Movies
+          </NavLink>
         </div>
-          <img
-            src="/user-profile-logo.png"
-            alt="user-profile"
-            className="user-avatar"
-          />
+        <img
+          src="/user-profile-logo.png"
+          alt="user-profile"
+          className="user-avatar"
+        />
       </div>
     </nav>
   );
