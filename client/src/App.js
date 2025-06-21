@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./Home";
 import MyList from "./modules/MyList";
-import TvSeries from "./modules/TvSeries";
+import TvShows from "./modules/TvShows";
 import Movies from "./modules/Movies";
 import PageNotFound from "./modules/PageNotFound";
 
@@ -20,7 +20,7 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/my-list" element={<MyList />}></Route>
-          <Route path="/tv-series" element={<TvSeries />}></Route>
+          <Route path="/tv-shows" element={<TvShows />}></Route>
           <Route path="/movies" element={<Movies />}></Route>
 
           <Route path="/" element={<Navigate to="/home" replace />} />

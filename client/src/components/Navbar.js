@@ -33,7 +33,7 @@ const Navbar = (data) => {
             MyList
           </NavLink>
           <NavLink
-            to="/tv-series"
+            to="/tv-shows"
             className={({ isActive }) =>
               isActive ? "nav-link active-nav" : "nav-link"
             }
