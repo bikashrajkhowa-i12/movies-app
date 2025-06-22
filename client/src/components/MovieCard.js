@@ -6,20 +6,20 @@ import {
   getCssStyling,
 } from "../utilities/helper";
 
-const MovieCard = (data) => {
-  const { movies = [{}], type = "", style = {}, options = {} } = data;
+const MovieCard = (props) => {
+  const { movies = [], type = "", style = {}, options = {} } = props || {};
   const { showMoreOption = false, displayLimit = null } = options || {};
 
   let movieList = getFilteredMovies(type, movies) || [];
 
-  if (showMoreOption && displayLimit) {
+  if (movieList.length && showMoreOption && displayLimit) {
     movieList = movieList.slice(0, Number(displayLimit));
     movieList.push({ more: true });
   }
 
   return (
     <div className="movie-card-section">
-      <h3 className="movie-card-header">Popular Movies</h3>
+      {movieList.length && <h3 className="movie-card-header">Popular Movies</h3>}
       {/* <div className="movie-card-layout"> */}
       <div style={getCssStyling(style)}>
         {movieList?.map((e, i) => {

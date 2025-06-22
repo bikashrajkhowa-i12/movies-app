@@ -1,10 +1,11 @@
 const { fetchContentFromDb } = require("./service");
+const { getReqQuery } = require("./helper");
 
 const fetchContent = async (req, res) => {
   try {
-    const type = req?.params?.type || req?.query?.type ;
-    const movies = await fetchContentFromDb({ type });
-    res.status(200).json(movies);
+    let reqQuery = getReqQuery(req);
+    const data = await fetchContentFromDb(reqQuery);
+    res.status(200).json(data);
   } catch (er) {
     res.status(400).json({ error: er.message || "Something went wrong!" });
   }

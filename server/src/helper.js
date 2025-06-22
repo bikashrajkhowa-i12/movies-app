@@ -1,0 +1,18 @@
+const { isEmpty } = require("lodash");
+
+const getReqQuery = (req) => {
+    let query;
+
+    if(!isEmpty(req?.params)) {
+        query = req.params;
+    } else if (!isEmpty(req?.query)) {
+        query = req.query
+    } else {
+        query = {}
+    }
+    return query;
+}
+
+module.exports = {
+    getReqQuery
+}

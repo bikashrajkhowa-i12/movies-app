@@ -1,6 +1,6 @@
 import { get, isEmpty } from "lodash";
 
-import { tmdbImageBaseUrl, imgNotFoundUrl, MOVIE_TYPES } from "./constants";
+import { MOVIE_TYPES, tmdbImageBaseUrl, imgNotFoundUrl } from "../constants";
 
 const camelToKebab = (str) =>
   str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();

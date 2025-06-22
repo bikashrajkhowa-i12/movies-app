@@ -1,16 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
-const LoadingWrapper = (data) => {
-  const [loading, setLoading] = useState(false);
+import { useApp } from "../contexts/useApp";
 
-  useEffect(() => {
-    // const intervalId = setInterval(() => {
-    //   setLoading((e) => !e);
-    // }, 2000);
-    // return () => clearInterval(intervalId);
-  }, []);
-
+const LoadingWrapper = (props) => {
+  const { loading = false } = useApp();
+  
   return (
     <div className={loading ? "loading-wrapper" : ""}>
       {loading ? <div className="spinner-border spinner-div" /> : ""}
