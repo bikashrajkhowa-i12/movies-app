@@ -4,7 +4,7 @@ const { getReqData } = require("./helper");
 const fetchContent = async (req, res) => {
   try {
     let reqData = getReqData(req);
-    const data = await fetchContentFromDb(reqQuery);
+    const data = await fetchContentFromDb(reqData);
     res.status(200).json(data);
   } catch (er) {
     res.status(400).json({ error: er.message || "Something went wrong!" });
