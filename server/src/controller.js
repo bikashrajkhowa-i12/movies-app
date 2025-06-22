@@ -1,9 +1,9 @@
 const { fetchContentFromDb } = require("./service");
-const { getReqQuery } = require("./helper");
+const { getReqData } = require("./helper");
 
 const fetchContent = async (req, res) => {
   try {
-    let reqQuery = getReqQuery(req);
+    let reqData = getReqData(req);
     const data = await fetchContentFromDb(reqQuery);
     res.status(200).json(data);
   } catch (er) {

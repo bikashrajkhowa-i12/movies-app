@@ -1,6 +1,6 @@
 const { isEmpty } = require("lodash");
 
-const getReqQuery = (req) => {
+const getReqData = (req) => {
     let query;
 
     if(!isEmpty(req?.params)) {
@@ -14,5 +14,5 @@ const getReqQuery = (req) => {
 }
 
 module.exports = {
-    getReqQuery
+    getReqData
 }
