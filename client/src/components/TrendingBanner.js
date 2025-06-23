@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import { getImgSrc, getFilteredMovies } from "../utilities/helper";
+import { getImgSrc, getDisplayList } from "../utilities/helper";
 
-const TrendingBanner = (data) => {
+const TrendingBanner = (props) => {
   const [index, setIndex] = useState(0);
 
-  const { movies = [] } = data;
-  const trendingList = getFilteredMovies("trending", movies)?.slice(0, 6) || [];
-
+  const { contentType = "", contentCategory = "", mediaContent = [] } = props;
+  const trendingList = getDisplayList(contentType, contentCategory, mediaContent)?.slice(0, 6) || [];
+  
   const next = () => {
     setIndex((index + 1) % trendingList.length);
   };
@@ -27,7 +27,9 @@ const TrendingBanner = (data) => {
       </div>
       <div className="poster-overlay"></div>
       <div className="poster-content">
-        <h2 className="poster-title">{poster?.title || "Unknown title!"}</h2>
+        <h2 className="poster-title">
+          {poster?.title || poster?.name || "Unknown title!"}
+        </h2>
         <p className="poster-overview">
           {poster?.overview || "Unknown overview!"}
         </p>

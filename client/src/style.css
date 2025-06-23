@@ -346,12 +346,12 @@ body {
   left: 20px;
 }
 
-.movie-card-section {
+.content-card-section {
   padding: 30px 50px;
   overflow-x: auto;
 }
 
-.movie-card-header {
+.content-card-header {
   color: white;
   margin-top: 30px;
   margin-bottom: 40px;
@@ -359,14 +359,7 @@ body {
   font-weight: bold;
 }
 
-/* Converted into in-line styling due to different-styling of same <div> across various pages*/
-/* .movie-card-layout {
-  display: inline-flex;
-  gap: 25px;
-  padding-bottom: 10px;
-} */
-
-.movie-card {
+.content-card {
   display: flex;
   width: auto;
   height: 230px;
@@ -377,44 +370,38 @@ body {
   border: 5px solid transparent;
 }
 
-.movie-card:hover {
+.content-card:hover {
   transform: scale(1.2);
   border: 5px solid #e5e7eb5c;
 }
 
-.more-card {
+.more-option-card {
   height: 100%;
   width: 150px;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.15)
-  );
   color: #ccc;
   font-weight: 500;
   font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed rgba(255, 255, 255, 0.3);
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
-.more-card:hover {
+.more-option-card:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
-.more-card::after {
+.more-option-card::after {
   content: "See More →";
   font-size: 0.9rem;
   opacity: 0.7;
   transition: opacity 0.3s ease;
 }
 
-.more-card:hover::after {
+.more-option-card:hover::after {
   opacity: 1;
   text-decoration: underline;
 }

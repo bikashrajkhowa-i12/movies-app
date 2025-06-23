@@ -38,7 +38,7 @@ const Navbar = (data) => {
               isActive ? "nav-link active-nav" : "nav-link"
             }
           >
-            Tv Shows
+            TV Shows
           </NavLink>
           <NavLink
             to="/movies"

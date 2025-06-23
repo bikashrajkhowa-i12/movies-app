@@ -1,6 +1,12 @@
 import { get, isEmpty } from "lodash";
 
-import { MOVIE_TYPES, tmdbImageBaseUrl, imgNotFoundUrl } from "../constants";
+import {
+  CONTENT_TYPES,
+  CONTENT_CATEGORIES,
+  CONTENT_CONFIGS,
+  tmdbImageBaseUrl,
+  imgNotFoundUrl,
+} from "../constants";
 
 const camelToKebab = (str) =>
   str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
@@ -13,16 +19,32 @@ export const getCssStyling = (styleObj) => {
   return obj;
 };
 
-export const getFilteredMovies = (type = "", movies = [] ) => {
-  
-  if (isEmpty(type)) return movies || [];
+// TODO: make getDisplayList() as a backend api
 
-  const filteredList = movies?.filter(
-    (e) =>
-      Number(get(e, `${MOVIE_TYPES[type]?.searchKey}`, null)) >=
-      Number(MOVIE_TYPES[type]?.minRate)
+export const getDisplayList = (
+  contentType = "",
+  contentCategory = "",
+  mediaContent = []
+) => {
+  if (
+    !CONTENT_TYPES.includes(contentType) ||
+    !CONTENT_CATEGORIES.includes(contentCategory)
+  )
+    return [];
+
+  const config = CONTENT_CONFIGS[contentType]?.[contentCategory];
+
+  const displayList =
+    mediaContent.filter((e) => {
+      return (
+        get(e, "type", "") === contentType &&
+        get(e, config.searchKey, 0) >= config.threshold
+      );
+    });
+  return displayList.sort(
+    (a, b) =>
+      Number(get(b, config.searchKey, 0)) - Number(get(a, config.searchKey, 0))
   );
-  return filteredList
 };
 
 export const getImgSrc = (movie) => {
