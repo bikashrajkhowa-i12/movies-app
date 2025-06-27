@@ -1,9 +1,9 @@
-const Movie = require("./models/Movie");
+const { mongo } = require("@bikashrajkhowa-i12/blackboxcore");
 
-const fetchContentFromDb = async (params={}) => {
+const fetchContentFromDb = async (query) => {
   try {
-    const query = ["", "all"].includes(params.type) ? {} : params;
-    const result = await Movie.find(query);
+    const { Movie } = mongo || {};
+    const result = await Movie.find(query).lean();
     return result;
   } catch (error) {
     console.log("Error fetching from Database!\n", error);

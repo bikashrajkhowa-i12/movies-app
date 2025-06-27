@@ -10,18 +10,21 @@ import MyList from "./modules/MyList";
 import TvShows from "./modules/TvShows";
 import Movies from "./modules/Movies";
 import PageNotFound from "./modules/PageNotFound";
+import DetailsPage from "./modules/DetailsPage";
 
 const App = () => {
   return (
     <div className="parent-container">
-      <Navbar />
-      <LoadingWrapper />
+      <div className="navbar-wrapper"><Navbar /></div>
       <div className="main-content">
+        <LoadingWrapper />
         <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/my-list" element={<MyList />}></Route>
-          <Route path="/tv-shows" element={<TvShows />}></Route>
-          <Route path="/movies" element={<Movies />}></Route>
+          <Route path="/home" element={<Home />} />
+          <Route path="/my-list" element={<MyList />} />
+          <Route path="/tv-shows" element={<TvShows />} />
+          <Route path="/movies" element={<Movies />} />
+
+          <Route path="/:type/:id" element={<DetailsPage />} />
 
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<PageNotFound />} />

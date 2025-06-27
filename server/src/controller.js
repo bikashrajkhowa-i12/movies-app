@@ -1,10 +1,10 @@
 const { fetchContentFromDb } = require("./service");
-const { getReqData } = require("./helper");
+const { buildQuery } = require("./helper");
 
 const fetchContent = async (req, res) => {
   try {
-    let reqData = getReqData(req);
-    const data = await fetchContentFromDb(reqData);
+    let query = buildQuery(req);
+    const data = await fetchContentFromDb(query);
     res.status(200).json(data);
   } catch (er) {
     res.status(400).json({ error: er.message || "Something went wrong!" });

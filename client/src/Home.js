@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
+import { useApp } from "./contexts/useApp";
+
 import callApi from "./api/callApi";
 
 import TrendingBanner from "./components/TrendingBanner";
 import ContentCard from "./components/ContentCard";
-
-import { useApp } from "./contexts/useApp";
 
 const Home = (props) => {
   const { setLoading } = useApp();
@@ -28,7 +28,7 @@ const Home = (props) => {
     };
 
     fetchMediaContent();
-  }, []);
+  }, [setLoading]);
 
   return (
     <div className="content-section">
@@ -42,7 +42,7 @@ const Home = (props) => {
         contentCategory="popular"
         mediaContent={mediaContent}
         cardTitle="Popular Movies"
-        style={{ "display": "inline-flex", "gap": "25px" }}
+        style={{ display: "inline-flex", gap: "25px" }}
         options={{ showMoreOption: true, displayLimit: 7 }}
       />}
       {mediaContent?.length && <ContentCard

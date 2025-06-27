@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
@@ -21,6 +27,9 @@ body {
 
 .main-content {
   flex: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .app-footer {
@@ -59,19 +68,23 @@ body {
   color: #cccccc;
 }
 
-.content-section {
-  position: relative;
+.navbar-wrapper {
+  position: sticky;
+  top: 0;
+  flex: none;
+  z-index: 110;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .navbar {
-  position: sticky;
-  min-height: 80px;
   justify-content: space-between; /*pushes the first element to extreme left and last elements to the extreme right horizontally*/
-  top: 0;
-  z-index: 110;
-  padding: 20px 50px;
+  padding: 0px 50px;
   display: flex;
   align-items: center;
+  height: 80px;
   background-color: rgb(27, 31, 34);
   overflow: hidden;
 }
@@ -196,16 +209,18 @@ body {
 
 .spinner-div {
   color: #000000c5;
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
 }
 
 .poster {
+  margin-top: 0;
   position: relative;
   height: 400px;
   width: 100%;
   overflow: hidden;
-  /* border-radius: 6px; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .poster-image-wrapper {
@@ -346,12 +361,16 @@ body {
   left: 20px;
 }
 
+.content-section {
+  position: relative;
+}
+
 .content-card-section {
   padding: 30px 50px;
   overflow-x: auto;
 }
 
-.content-card-header {
+.content-header-title {
   color: white;
   margin-top: 30px;
   margin-bottom: 40px;
@@ -361,9 +380,9 @@ body {
 
 .content-card {
   display: flex;
-  width: auto;
-  height: 230px;
-  overflow: auto;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
   border-radius: 8px;
   transition: transform 0.4s ease, border 0.3s ease;
   cursor: pointer;

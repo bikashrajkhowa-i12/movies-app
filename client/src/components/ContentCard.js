@@ -1,11 +1,9 @@
 import React from "react";
 
-import { getImgSrc, getDisplayList, getCssStyling } from "../utilities/helper";
+import { getImgSrc } from "../utilities/helper";
 
 const ContentCard = (props) => {
   const {
-    contentType = "all",
-    contentCategory = "",
     mediaContent = [],
     cardTitle = "",
     style = {},
@@ -13,22 +11,20 @@ const ContentCard = (props) => {
   } = props || {};
   const { showMoreOption = false, displayLimit = null } = options || {};
 
-  let displayList = mediaContent.length
-    ? getDisplayList(contentType, contentCategory, mediaContent)
-    : [];
+  let displayList = mediaContent || []
 
   if (displayLimit && displayList?.length > displayLimit) {
     displayList = displayList.slice(0, Number(displayLimit));
   }
 
-  if (showMoreOption) displayList.push({ more: true });
+  if (showMoreOption && displayList.length > 0) displayList.push({ more: true });
 
   return (
     <div className="content-card-section">
-      {displayList.length && (
-        <h3 className="content-card-header">{cardTitle}</h3>
+      {displayList.length > 0 && (
+        <h3 className="content-header-title">{cardTitle}</h3>
       )}
-      <div style={getCssStyling(style)}>
+      {displayList.length > 0 && <div style={style}>
         {displayList?.map((e, i) => {
           return (
             <div className="content-card" key={i}>
@@ -40,7 +36,7 @@ const ContentCard = (props) => {
             </div>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 };

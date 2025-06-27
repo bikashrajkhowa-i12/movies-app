@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -6,15 +6,40 @@ import { getImgSrc, getDisplayList } from "../utilities/helper";
 
 const TrendingBanner = (props) => {
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef(null);
 
   const { contentType = "", contentCategory = "", mediaContent = [] } = props;
-  const trendingList = getDisplayList(contentType, contentCategory, mediaContent)?.slice(0, 6) || [];
-  
+
+  const trendingList =
+    getDisplayList(contentType, contentCategory, mediaContent)?.slice(0, 6) ||
+    [];
+
+  useEffect(() => {
+    start();
+    return () => clear(); // cleanup on unmount
+  }, [trendingList]); // reset if the array changes
+
+  const start = () => {
+    clear(); // prevent duplicate intervals
+    if (trendingList.length === 0) return;
+    intervalRef.current = setInterval(() => {
+      setIndex((prev) => (prev + 1) % trendingList.length);
+    }, 5000);
+  };
+
+  const clear = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+
   const next = () => {
-    setIndex((index + 1) % trendingList.length);
+    setIndex((prevIndex) => (prevIndex + 1) % trendingList.length);
+    start();
   };
   const prev = () => {
-    setIndex((index - 1 + trendingList.length) % trendingList.length);
+    setIndex(
+      (prevIndex) => (prevIndex - 1 + trendingList.length) % trendingList.length
+    );
+    start();
   };
 
   const poster = trendingList[index];
@@ -30,9 +55,7 @@ const TrendingBanner = (props) => {
         <h2 className="poster-title">
           {poster?.title || poster?.name || "Unknown title!"}
         </h2>
-        <p className="poster-overview">
-          {poster?.overview || "Unknown overview!"}
-        </p>
+        <p className="poster-overview">{poster?.overview || ""}</p>
         <div className="poster-buttons">
           <button className="poster-info-button">ℹ More Info</button>
         </div>
@@ -42,7 +65,10 @@ const TrendingBanner = (props) => {
           <div
             key={i}
             className={`dot ${i === index ? "active" : ""}`}
-            onClick={() => setIndex(i)}
+            onClick={() => {
+              setIndex(i);
+              start();
+            }}
           ></div>
         ))}
       </div>
