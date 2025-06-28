@@ -11,6 +11,16 @@ const fetchContent = async (req, res) => {
   }
 };
 
+const fetchById = async (req, res) => {
+  try {
+    let query = buildQuery(req);
+    const data = await fetchContentFromDb(query);
+    res.status(200).json(data[0]);
+  } catch (error) {
+    res.status(400).json({ error: error.message || "Something went wrong!"})
+  }
+}
+
 const fetchByCriteria = async (req, res) => {
   try {
   } catch (error) {}
@@ -28,6 +38,7 @@ const userProfile = async (req, res) => {
 
 module.exports = {
   fetchContent,
+  fetchById,
   fetchByCriteria,
   myList,
   userProfile,

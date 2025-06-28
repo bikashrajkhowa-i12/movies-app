@@ -9,6 +9,8 @@ contentRoutes.forEach((e) => {
     router.route(e).get(controller.fetchContent);
 })
 
+router.route("/:type/:id").get(controller.fetchById);
+
 router.route("/fetch-by-criteria").get(controller.fetchByCriteria);
 
 router

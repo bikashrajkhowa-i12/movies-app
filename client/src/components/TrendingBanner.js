@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { getImgSrc, getDisplayList } from "../utilities/helper";
@@ -7,12 +8,16 @@ import { getImgSrc, getDisplayList } from "../utilities/helper";
 const TrendingBanner = (props) => {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
+  const navigate = useNavigate();
 
   const { contentType = "", contentCategory = "", mediaContent = [] } = props;
 
   const trendingList =
     getDisplayList(contentType, contentCategory, mediaContent)?.slice(0, 6) ||
     [];
+
+  const poster = trendingList[index];
+  const imgSrc = getImgSrc(poster);
 
   useEffect(() => {
     start();
@@ -42,8 +47,10 @@ const TrendingBanner = (props) => {
     start();
   };
 
-  const poster = trendingList[index];
-  const imgSrc = getImgSrc(poster);
+  const onClickMore = (props) => {
+    const { id = null, type = null } = props || {};
+    if(id && type) navigate(`/${type}/${id}`);
+  };
 
   return (
     <div className="poster">
@@ -57,7 +64,9 @@ const TrendingBanner = (props) => {
         </h2>
         <p className="poster-overview">{poster?.overview || ""}</p>
         <div className="poster-buttons">
-          <button className="poster-info-button">ℹ More Info</button>
+          <button className="poster-info-button" onClick={() => onClickMore(poster)}>
+            ℹ More Info
+          </button>
         </div>
       </div>
       <div className="poster-slide-indicator">

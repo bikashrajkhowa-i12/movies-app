@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { getImgSrc } from "../utilities/helper";
 
 const ContentCard = (props) => {
+  const navigate = useNavigate();
   const {
     mediaContent = [],
     cardTitle = "",
@@ -19,6 +21,11 @@ const ContentCard = (props) => {
 
   if (showMoreOption && displayList.length > 0) displayList.push({ more: true });
 
+  const onClickCard = (item) => {
+    const { id=null, type=""} = item || {};
+    if(id && type) navigate(`/${type}/${id}`)
+  }
+
   return (
     <div className="content-card-section">
       {displayList.length > 0 && (
@@ -27,7 +34,7 @@ const ContentCard = (props) => {
       {displayList.length > 0 && <div style={style}>
         {displayList?.map((e, i) => {
           return (
-            <div className="content-card" key={i}>
+            <div className="content-card" key={i} onClick={() => onClickCard(e)}>
               {e.more ? (
                 <div className="more-option-card"></div>
               ) : (
