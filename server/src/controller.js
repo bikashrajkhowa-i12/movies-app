@@ -20,15 +20,9 @@ const fetchById = async (req, res) => {
   try {
     let { id = null } = buildQuery(req);
     if (!id && !type) throw new Error("id and type fields are missing!");
-
+    
     let data = await getContentById(id);
-
-    if (!isEmpty(data)) {
-      data = await fetchFromExternalApi(data);
-      res.status(200).json(data);
-    } else {
-      res.status(200).json(data);
-    }
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error: error.message || "Something went wrong!" });
   }
